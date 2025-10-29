@@ -48,6 +48,6 @@ the grass beneath my back, air?
 Maybe I’ll give thanks for a moment,
 to whomever or whatever will listen,
 for my being alive, I think.
-Or, perhaps, the mercy of a new day. --compassion
+Or, perhaps, the compassion of a new day.
 
 #denver-august-2022 
