@@ -57,7 +57,18 @@
   }
 
   .prose.prewrap p {
-    white-space: pre;
+    white-space: pre-line;
+    text-indent: 2ch hanging each-line;
+  }
+
+  .prose.prewrap p.poem {
+    white-space: normal;
+  }
+
+  p.poem span.line {
+    display: inline-block;
+    padding-inline-start: 2ch;
+    text-indent: -2ch;
   }
 
 </style>

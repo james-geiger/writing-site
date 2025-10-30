@@ -45,6 +45,80 @@
     });
 </script>
 {% endif %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // This script adds hanging indent support for chromium-based browsers
+  // which do not currently support hanging indents per line
+
+  // If the ideal feature exists, do nothing.
+  if (CSS.supports('text-indent: 2ch hanging each-line')) return;
+
+  // Select all poem paragraphs.
+  const paras = document.querySelectorAll('article.prose.prewrap p');
+
+  paras.forEach(p => {
+    p.classList.add('poem'); // CSS selector needs to override pre-line of the prewrap class
+
+    const frag = document.createDocumentFragment();
+    let currentContainer = null;
+
+    // Start a new "line" span
+    const startLine = () => {
+      const span = document.createElement('span');
+      span.className = 'line';
+      frag.appendChild(span);
+      currentContainer = span;
+    };
+
+    // Insert a hard break and force a new line span
+    const breakLine = () => {
+      currentContainer = null;
+      frag.appendChild(document.createElement('br'));
+    };
+
+    // Append plain text, splitting on hard newlines
+    const appendText = (text) => {
+      // normalize CRLF/CR to LF, then split
+      const parts = text.replace(/\r\n?/g, '\n').split('\n');
+      parts.forEach((part, idx) => {
+        if (!currentContainer) startLine();
+        currentContainer.appendChild(document.createTextNode(part));
+        if (idx < parts.length - 1) breakLine();
+      });
+    };
+
+    // Depth-first walk that preserves inline markup and treats <br> as a hard break
+    const walk = (node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        if (node.nodeValue) appendText(node.nodeValue);
+        return;
+      }
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.tagName === 'BR') {
+          breakLine();
+          return;
+        }
+        // Clone inline element and recurse inside it within the current line
+        const clone = node.cloneNode(false);
+        if (!currentContainer) startLine();
+        const prevContainer = currentContainer;
+        prevContainer.appendChild(clone);
+        currentContainer = clone;
+        Array.from(node.childNodes).forEach(walk);
+        currentContainer = prevContainer;
+      }
+    };
+
+    Array.from(p.childNodes).forEach(walk);
+
+    // Ensure at least one line if paragraph was empty
+    if (!frag.firstChild) startLine();
+
+    // Replace original content
+    p.replaceChildren(frag);
+  });
+});
+</script>
 {% endblock head %}
 
 {% block content %}
