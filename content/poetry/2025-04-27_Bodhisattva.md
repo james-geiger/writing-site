@@ -52,5 +52,3 @@ a stranger,
 a bird,
 water,
 air?
-
-#cabo-san-lucas-july-2022
