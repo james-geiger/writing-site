@@ -1,5 +1,7 @@
 +++
-title: Common Decency
+title="Common Decency"
+
+[extra] wrap=true
 +++
 
 Strange breed, this one,
