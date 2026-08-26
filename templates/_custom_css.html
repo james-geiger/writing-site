@@ -75,4 +75,20 @@
     color: var(--primary-pale-color)
   }
 
+  /* Left-justify images by default (theme's main.css centers them and
+     loads after this block, so !important is needed to win the cascade) */
+  .prose img {
+    margin-inline: 0 auto !important;
+  }
+
+  .prose figure {
+    margin-inline: 0 !important;
+    width: fit-content;
+  }
+
+  .prose figcaption {
+    text-align: left;
+    margin-inline: 0 !important;
+  }
+
 </style>
