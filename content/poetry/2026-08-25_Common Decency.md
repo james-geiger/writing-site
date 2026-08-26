@@ -4,7 +4,7 @@ title="Common Decency"
 [extra]
 wrap=true
 +++
-{{ figure(src="/img/common-decency.jpg", alt="A tied green plastic bag, likely a dog waste bag, left sitting on a boulder along a hiking trail, with a blurred backdrop of forest and a rocky path.") }}
+{{ figure(src="/img/common-decency.jpg", alt="A tied green plastic bag, likely a dog waste bag, left sitting on a boulder along a hiking trail, with a blurred backdrop of forest and a rocky path.", width=400) }}
 
 Strange breed, this one,
 who picks up my waste
